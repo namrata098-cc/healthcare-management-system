@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f4f8;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c7be5; }
+        p  { color: #555; }
+        .badge {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #2c7be5;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Healthcare Management System</h1>
+        <p>Spring Boot application is running successfully.</p>
+        <div>
+            <span class="badge">Spring Boot 3.3.4</span>
+            <span class="badge">Java 21</span>
+            <span class="badge">Spring Security</span>
+            <span class="badge">Thymeleaf</span>
+            <span class="badge">Spring Data JPA</span>
+        </div>
+    </div>
+</body>
+</html>
