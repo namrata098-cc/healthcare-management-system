@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Healthcare Management System</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Healthcare Management System</h1>
+
+        <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </header>
+
+    <main>
+
+        <h2>Admin Dashboard</h2>
+        <p>Welcome, Administrator.</p>
+
+        <section>
+            <h3>Overview</h3>
+
+            <div>
+                <h4>Total Doctors</h4>
+                <p th:text="${totalDoctors}">0</p>
+            </div>
+
+            <div>
+                <h4>Total Patients</h4>
+                <p th:text="${totalPatients}">0</p>
+            </div>
+
+            <div>
+                <h4>Total Appointments</h4>
+                <p th:text="${totalAppointments}">0</p>
+            </div>
+
+            <div>
+                <h4>Pending Appointments</h4>
+                <p th:text="${pendingAppointments}">0</p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Management</h3>
+
+            <button>Manage Doctors</button>
+            <button>Manage Patients</button>
+            <button>Manage Appointments</button>
+            <button>Manage Users</button>
+            <button>View Feedback</button>
+            <button>Settings</button>
+        </section>
+
+        <section>
+            <h3>Recent Appointments</h3>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td colspan="5">No appointments yet.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+</body>
+</html>

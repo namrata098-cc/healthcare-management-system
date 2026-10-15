@@ -1,0 +1,12 @@
+POST http://localhost:8080/api/users
+###
+GET http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+    "fullName": "Test Admin",
+    "email": "admin@test.com",
+    "password": "Admin@12345",
+    "role": "ADMIN",
+    "phoneNumber": "9876543210"
+}

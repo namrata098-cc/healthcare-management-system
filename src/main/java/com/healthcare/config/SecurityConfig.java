@@ -1,29 +1,54 @@
 package com.healthcare.config;
 
+import com.healthcare.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 
-/**
- * Spring Security configuration for the Healthcare Management System.
- * Full authentication and role-based access control will be configured
- * once the User entity and UserDetailsService are implemented.
- */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final CustomUserDetailsService userDetailsService;
+
+    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+   @Bean
+public DaoAuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setUserDetailsService(userDetailsService);
+    provider.setPasswordEncoder(passwordEncoder());
+    return provider;
+}
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(auth -> auth
-                // Allow access to static resources and the home page without authentication
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/").permitAll()
-                // All other requests require authentication
-                .anyRequest().authenticated()
-            )
+            .userDetailsService(userDetailsService)
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
+           .authorizeHttpRequests(auth -> auth
+    .requestMatchers(
+        "/",
+        "/login",
+        "/css/**",
+        "/js/**",
+        "/images/**"
+    ).permitAll()
+    .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+    .anyRequest().authenticated()
+)
             .formLogin(form -> form
                 .loginPage("/login")
                 .defaultSuccessUrl("/dashboard", true)
